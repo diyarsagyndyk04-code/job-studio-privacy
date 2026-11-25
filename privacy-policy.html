@@ -38,7 +38,7 @@
 <table>
 <tr><th>Category</th><th>Details</th></tr>
 <tr><td>Vacancy data</td><td>Title, employer, city, salary, description, public contact details placed in the listing by the employer, link to the original listing, dates. For public Threads posts found by search: post ID, text, permalink, timestamp, username and media type, as returned by the Threads API.</td></tr>
-<tr><td>Connected Threads accounts</td><td>Threads user ID and an access token issued to the app by the account owner, used to publish the content the owner chose to publish.</td></tr>
+<tr><td>Connected Threads accounts</td><td>Threads user ID and an access token issued to the app by the account owner, used to call the Threads API for that account: to search public posts and to publish the content the owner chose to publish.</td></tr>
 <tr><td>Published content</td><td>The text and images we publish, the identifier returned by the platform, and the time of publication.</td></tr>
 <tr><td>Telegram bot / Mini App users</td><td>Telegram chat ID, username (if any), chosen vacancy categories, saved vacancies, and a phone number or contact only if the user provides it.</td></tr>
 <tr><td>Usage statistics and logs</td><td>Vacancy link clicks (vacancy, link type, browser user-agent text, time), view counts of our own Telegram posts, and application logs. The application does not store IP addresses.</td></tr>
@@ -47,7 +47,7 @@
 
 <h2>3. How we use Threads data</h2>
 <ul>
-<li>Threads search results are used to identify and organize job vacancies. Access tokens and account IDs are used only to publish on the authorized account.</li>
+<li>Threads search results are used to identify and organize job vacancies. Access tokens and account IDs are used only for Threads API calls on behalf of the authorized account, that is, to search and to publish.</li>
 <li>We do not read other users’ messages or private content, and we do not sell or license Threads data.</li>
 <li>Threads data is used only for the purposes described in this policy. If our use changes materially, we will update this policy first and obtain any Meta approval that is required.</li>
 </ul>
@@ -98,7 +98,7 @@
 <p>Данные вакансий и публичные контакты, указанные работодателем; для найденных постов Threads — ID, текст, ссылка, время, username и тип медиа; ID аккаунта Threads и токен доступа (для публикации); опубликованные материалы; ID чата, username и категории пользователей бота (телефон — только если пользователь сам указал); статистика переходов и просмотров, логи. IP-адреса приложение не хранит.</p>
 
 <h2>Данные Threads</h2>
-<p>Результаты поиска используются, чтобы находить и систематизировать вакансии; токен — только для публикации. Мы не читаем личные сообщения и закрытый контент, не продаём и не лицензируем данные Threads и используем их только в целях, описанных в политике. Перед публикацией производного от Threads контента за пределами Threads мы проверяем, что это допускается условиями Meta.</p>
+<p>Результаты поиска используются, чтобы находить и систематизировать вакансии; токен и ID аккаунта — только для запросов к Threads API от имени авторизованного аккаунта (поиск и публикация). Мы не читаем личные сообщения и закрытый контент, не продаём и не лицензируем данные Threads и используем их только в целях, описанных в политике. Перед публикацией производного от Threads контента за пределами Threads мы проверяем, что это допускается условиями Meta.</p>
 
 <h2>Хранение и безопасность</h2>
 <p>Приложение работает на компьютере оператора; данные хранятся в локальных файлах SQLite, логах и конфигурации, доступ только у оператора. Токены лежат в локальном файле конфигурации открытым текстом (под защитой учётной записи ОС), вне системы контроля версий. Mini App доступен через туннель Cloudflare (HTTPS). Абсолютную безопасность гарантировать нельзя.</p>
