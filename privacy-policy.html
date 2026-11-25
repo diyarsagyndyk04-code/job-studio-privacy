@@ -15,7 +15,6 @@
   th, td { border: 1px solid #ccd; padding: 7px 9px; text-align: left; vertical-align: top; }
   th { background: #f1f3f6; }
   .meta { color: #6a727c; font-size: .93rem; }
-  .box { border-left: 4px solid #3b82f6; background: #3b82f614; padding: 10px 14px; margin: 1em 0; }
 </style>
 </head>
 <body>
@@ -28,63 +27,54 @@
 <p><strong>Privacy contact:</strong> <a href="mailto:diyarsagyndyk04@gmail.com">diyarsagyndyk04@gmail.com</a></p>
 
 <h2>1. What Job Studio does</h2>
-<p><strong>Currently in operation:</strong></p>
 <ul>
-<li>collects public job listings from job sites (hh.kz, enbek.kz, OLX.kz / Market.kz) and public Telegram channels, filters them and removes duplicates;</li>
-<li>prepares job posts and publishes them to the operator’s own Telegram channels and to Threads accounts that the account owner has authorized through Meta’s authorization flow (permissions <code>threads_basic</code> and <code>threads_content_publish</code>);</li>
-<li>provides a Telegram bot and Mini App through which users can subscribe to vacancy categories and save vacancies.</li>
+<li><strong>Search.</strong> Finds public job vacancies by keyword on Threads through the Threads API (permission <code>threads_keyword_search</code>), and collects public listings from job sites (hh.kz, enbek.kz, OLX.kz / Market.kz) and public Telegram channels. Searching public Threads posts requires Meta’s approval of that permission and is used only once it is granted.</li>
+<li><strong>Organizing.</strong> Filters vacancies and removes duplicates.</li>
+<li><strong>Publishing.</strong> Prepares vacancy posts and publishes them to the operator’s Telegram channels and to Threads accounts whose owners have authorized the app (permissions <code>threads_basic</code> and <code>threads_content_publish</code>).</li>
+<li><strong>Telegram bot / Mini App.</strong> Lets users subscribe to vacancy categories and save vacancies.</li>
 </ul>
-<p><strong>Planned, not yet in operation:</strong> searching public Threads posts by keyword (permission <code>threads_keyword_search</code>) to find job-related posts. This feature will be enabled only after Meta approves it for the app, and it will operate only as described in section 3.</p>
 
 <h2>2. Information we process</h2>
 <table>
 <tr><th>Category</th><th>Details</th></tr>
-<tr><td>Job listings (current)</td><td>Title, employer, city, salary, description, public contact details placed in the listing by the employer, link to the original listing, dates.</td></tr>
-<tr><td>Connected Threads accounts (current)</td><td>Threads user ID and an access token issued to the app by the account owner. Used only to publish the content the owner chose to publish.</td></tr>
-<tr><td>Published content (current)</td><td>The text and images we publish, the identifier returned by the platform, and the time of publication.</td></tr>
-<tr><td>Telegram bot / Mini App users (current)</td><td>Telegram chat ID, username (if any), chosen vacancy categories, saved vacancies, and a phone number or contact only if the user provides it.</td></tr>
-<tr><td>Usage statistics (current)</td><td>Vacancy link clicks (vacancy, link type, browser user-agent text, time; no IP addresses are stored by the application) and view counts of our own Telegram posts read from their public pages.</td></tr>
-<tr><td>Public Threads search results (planned)</td><td>For posts returned by keyword search: post ID, text, permalink, timestamp, username and media type, as returned by the Threads API.</td></tr>
-<tr><td>Technical logs (current)</td><td>Application logs with operational and error messages.</td></tr>
+<tr><td>Vacancy data</td><td>Title, employer, city, salary, description, public contact details placed in the listing by the employer, link to the original listing, dates. For public Threads posts found by search: post ID, text, permalink, timestamp, username and media type, as returned by the Threads API.</td></tr>
+<tr><td>Connected Threads accounts</td><td>Threads user ID and an access token issued to the app by the account owner, used to publish the content the owner chose to publish.</td></tr>
+<tr><td>Published content</td><td>The text and images we publish, the identifier returned by the platform, and the time of publication.</td></tr>
+<tr><td>Telegram bot / Mini App users</td><td>Telegram chat ID, username (if any), chosen vacancy categories, saved vacancies, and a phone number or contact only if the user provides it.</td></tr>
+<tr><td>Usage statistics and logs</td><td>Vacancy link clicks (vacancy, link type, browser user-agent text, time), view counts of our own Telegram posts, and application logs. The application does not store IP addresses.</td></tr>
 </table>
-<p>We do not intentionally collect sensitive categories of data, and we do not build profiles of individual people.</p>
+<p>We do not intentionally collect sensitive categories of data.</p>
 
-<h2>3. How Threads data is used</h2>
+<h2>3. How we use Threads data</h2>
 <ul>
-<li><strong>Publishing (current).</strong> Tokens and account IDs are used only to publish on the authorized account. We do not read other users’ Threads content, profiles, replies or messages and do not use Threads insights.</li>
-<li><strong>Keyword search (planned).</strong> Public posts returned by search will be used only to identify job vacancies and to link to them. They will not be used for advertising, profiling of individuals, decisions about individuals (such as employment eligibility), or training AI models; they will not be sold, licensed or shared with third parties; and their content will not be republished on other platforms. Records derived from Threads posts (including any vacancy text or link taken from them) are treated as Threads data: they are reviewed only by the operator, are not published to Telegram or any other platform, and follow the retention rules in section 5. We store the post’s permalink only so the operator can open the original post on Threads. If we learn that a post was deleted or is no longer public, or that its permalink is no longer provided, we delete our copy.</li>
-<li>Threads data is never used for any purpose other than those described in this policy. If our use changes materially, we will update this policy first and obtain any Meta approval required.</li>
+<li>Threads search results are used to identify and organize job vacancies. Access tokens and account IDs are used only to publish on the authorized account.</li>
+<li>We do not read other users’ messages or private content, and we do not sell or license Threads data.</li>
+<li>Threads data is used only for the purposes described in this policy. If our use changes materially, we will update this policy first and obtain any Meta approval that is required.</li>
 </ul>
 
 <h2>4. Storage and security</h2>
-<ul>
-<li>Job Studio runs on the operator’s own computer. Data is stored in local SQLite database files, local log files and a local configuration file; no cloud database is used.</li>
-<li>Only the operator has access to that computer and those files. Bot and Meta access tokens are kept in a local configuration file that is excluded from source control; they are stored as plain text, protected by the operating-system account, not by separate encryption.</li>
-<li>The Mini App’s web server runs locally and is reachable from the internet through a Cloudflare tunnel (HTTPS). The server’s access log is switched off, so the application does not log visitors’ IP addresses; Cloudflare, as the tunnel provider, can see them.</li>
-<li>No method of storage or transmission is completely secure.</li>
-</ul>
+<p>Job Studio runs on the operator’s own computer. Data is stored in local SQLite database files, local log files and a local configuration file; no cloud database is used. Only the operator has access to them. Access tokens are kept in the local configuration file, which is excluded from source control, as plain text protected by the operating-system account. The Mini App’s web server is reachable through a Cloudflare tunnel (HTTPS). No method of storage or transmission is completely secure.</p>
 
 <h2>5. Retention</h2>
 <table>
 <tr><th>Data</th><th>Retention</th></tr>
-<tr><td>Job listings</td><td>Marked closed or archived automatically when the listing is closed or outdated (default: about 14 days after publication). Archived records stay in the database so the same listing is not collected twice, and are erased on request.</td></tr>
+<tr><td>Vacancy data, including data from Threads</td><td>Kept only as long as needed to find, organize and publish vacancies. Listings are marked closed or archived automatically when outdated (by default about 14 days after publication). Data from Threads is deleted when it is no longer needed, when we learn that the original post was deleted or is no longer public, on your request, or when Meta requires it.</td></tr>
 <tr><td>Threads access token and account ID</td><td>Until the account owner disconnects the app, the token expires, or deletion is requested.</td></tr>
-<tr><td>Public Threads search results (planned)</td><td>Deleted when no longer needed for review, and in any case within 30 days of retrieval (including derived records and permalinks); also deleted promptly when the original post is removed, on your request, or when Meta requires it.</td></tr>
 <tr><td>Telegram bot subscription data</td><td>While the subscription is active; deleted on request.</td></tr>
-<tr><td>Usage statistics and logs</td><td>Statistics are kept while useful and deleted on request where linked to you; log files rotate automatically.</td></tr>
+<tr><td>Statistics and logs</td><td>Kept while useful; log files rotate automatically.</td></tr>
 </table>
 
 <h2 id="deletion">6. Your rights and data deletion</h2>
-<p>You can ask for access to, correction of, or deletion of your data, including data received through Threads authorization and data from the Telegram bot. This applies to every user who can access the app.</p>
+<p>You can ask for access to, correction of, or deletion of your data, including data received through Threads and data from the Telegram bot.</p>
 <ol>
-<li>Email <a href="mailto:diyarsagyndyk04@gmail.com">diyarsagyndyk04@gmail.com</a> with the subject “Job Studio data deletion”, naming your Threads or Telegram username. We may ask you to confirm the account is yours.</li>
+<li>Email <a href="mailto:diyarsagyndyk04@gmail.com">diyarsagyndyk04@gmail.com</a> with the subject “Job Studio data deletion”, naming your Threads or Telegram username. We may ask you to confirm that the account is yours.</li>
 <li>You can also revoke Job Studio’s access yourself in your Threads or Instagram account settings (website permissions / “Apps and websites”). Publishing on your account then stops.</li>
 <li>If your post or contact details appear in a vacancy record, email us the link and we will remove it.</li>
 </ol>
-<p>We complete verified requests within 30 days and confirm by email. Deletion removes the stored Threads user ID and token, subscription records, search results and statistics linked to you from the database. Job Studio does not use Facebook Login. This section is also the data-deletion instruction page for the Meta platform. Residents of Kazakhstan also have rights under the Law of the Republic of Kazakhstan “On Personal Data and Their Protection”.</p>
+<p>We aim to complete verified requests within 30 days and confirm by email. Job Studio does not use Facebook Login. This section is also the data-deletion instruction page for the Meta platform. Residents of Kazakhstan also have rights under the Law of the Republic of Kazakhstan “On Personal Data and Their Protection”.</p>
 
 <h2>7. Sharing</h2>
-<p>We do not sell, license or share personal data or Threads data with third parties for their own purposes. Data may be handled only by service providers that are necessary to run the service: Telegram (bot and channels), Meta (publishing to Threads/Instagram), and Cloudflare (tunnel). Ordinary web requests are also sent to the job sites listed above. We may disclose data if required by law.</p>
+<p>We do not sell or license personal data or Threads data. Data is handled only by service providers needed to run the service: Telegram (bot and channels), Meta (publishing and search through the Threads API) and Cloudflare (tunnel). We send ordinary web requests to the job sites listed above and, if an external text-processing service is configured, we may send it public vacancy text to process. We disclose data where required by law. Before any content derived from Threads data is published outside Threads, we check that this is permitted under Meta’s terms.</p>
 
 <h2>8. Children and changes</h2>
 <p>Job Studio is not directed at children under 16. We may update this policy; the date at the top shows the current version, and material changes are published here before they take effect.</p>
@@ -102,26 +92,25 @@
 <p>Job Studio — независимый инструмент для поиска, систематизации и публикации публичных вакансий (в основном в Казахстане). Его ведёт частный разработчик; проект не связан с Meta, Threads, Instagram, Telegram и сайтами вакансий. Контакт: <a href="mailto:diyarsagyndyk04@gmail.com">diyarsagyndyk04@gmail.com</a>.</p>
 
 <h2>Что делает приложение</h2>
-<p><strong>Работает сейчас:</strong> собирает публичные вакансии (hh.kz, enbek.kz, OLX.kz / Market.kz, публичные Telegram-каналы), фильтрует и убирает дубли; готовит посты и публикует их в собственные Telegram-каналы и в аккаунты Threads, владельцы которых дали разрешение (права <code>threads_basic</code>, <code>threads_content_publish</code>); даёт Telegram-бота и Mini App для подписки на категории и сохранения вакансий.</p>
-<p><strong>Планируется (пока не работает):</strong> поиск публичных постов Threads по ключевым словам (право <code>threads_keyword_search</code>) для поиска вакансий — только после одобрения Meta и только так, как описано ниже.</p>
+<p>Ищет публичные вакансии по ключевым словам в Threads через Threads API (право <code>threads_keyword_search</code>; используется только после одобрения Meta) и собирает вакансии с сайтов (hh.kz, enbek.kz, OLX.kz / Market.kz) и публичных Telegram-каналов; фильтрует и убирает дубли; готовит посты и публикует их в Telegram-каналы оператора и в аккаунты Threads, владельцы которых дали разрешение (<code>threads_basic</code>, <code>threads_content_publish</code>); предоставляет Telegram-бота и Mini App для подписки и сохранения вакансий.</p>
 
 <h2>Какие данные обрабатываются</h2>
-<p>Публичные вакансии и контакты, которые указал работодатель; ID аккаунта Threads и токен доступа (только для публикации); опубликованные тексты и изображения; ID чата, username и выбранные категории пользователей бота (телефон — только если пользователь сам указал); статистика переходов по ссылкам (без IP-адресов) и просмотры собственных постов в Telegram; технические логи. Для планируемого поиска: ID, текст, ссылка, время, username и тип медиа найденного поста.</p>
+<p>Данные вакансий и публичные контакты, указанные работодателем; для найденных постов Threads — ID, текст, ссылка, время, username и тип медиа; ID аккаунта Threads и токен доступа (для публикации); опубликованные материалы; ID чата, username и категории пользователей бота (телефон — только если пользователь сам указал); статистика переходов и просмотров, логи. IP-адреса приложение не хранит.</p>
 
 <h2>Данные Threads</h2>
-<p>Сейчас токен используется только для публикации; чужие посты, профили и сообщения Threads приложение не читает. В планируемом поиске публичные посты используются только для выявления вакансий оператором; не используются для рекламы, профилирования людей, решений о людях и обучения ИИ; не продаются, не передаются третьим лицам и не публикуются в Telegram и на других площадках (производные записи тоже). Ссылка на пост хранится только чтобы оператор мог открыть оригинал. Данные поиска и производные записи удаляются не позднее 30 дней после получения, а также сразу, если пост удалён, по вашему запросу или по требованию Meta.</p>
+<p>Результаты поиска используются, чтобы находить и систематизировать вакансии; токен — только для публикации. Мы не читаем личные сообщения и закрытый контент, не продаём и не лицензируем данные Threads и используем их только в целях, описанных в политике. Перед публикацией производного от Threads контента за пределами Threads мы проверяем, что это допускается условиями Meta.</p>
 
 <h2>Хранение и безопасность</h2>
-<p>Приложение работает на компьютере оператора; данные лежат в локальных файлах SQLite, логах и конфигурации. Токены хранятся в локальном файле открытым текстом (без отдельного шифрования), вне системы контроля версий. Веб-часть Mini App доступна через туннель Cloudflare (HTTPS); приложение не пишет IP-адреса посетителей. Абсолютную безопасность гарантировать нельзя.</p>
+<p>Приложение работает на компьютере оператора; данные хранятся в локальных файлах SQLite, логах и конфигурации, доступ только у оператора. Токены лежат в локальном файле конфигурации открытым текстом (под защитой учётной записи ОС), вне системы контроля версий. Mini App доступен через туннель Cloudflare (HTTPS). Абсолютную безопасность гарантировать нельзя.</p>
 
 <h2>Сроки хранения</h2>
-<p>Вакансии автоматически закрываются или архивируются (по умолчанию примерно через 14 дней), записи остаются в базе, чтобы не собирать вакансию дважды, и удаляются по запросу. Токен Threads — до отключения приложения, истечения токена или запроса на удаление. Подписка на бота — пока активна. Логи ротируются.</p>
+<p>Данные вакансий хранятся, пока нужны для поиска, систематизации и публикации; устаревшие вакансии автоматически закрываются или архивируются (по умолчанию примерно через 14 дней). Данные из Threads удаляются, когда больше не нужны, когда мы узнаём, что пост удалён или стал не публичным, по вашему запросу или по требованию Meta. Токен — до отключения приложения, истечения срока или запроса на удаление. Подписка на бота — пока активна. Логи ротируются.</p>
 
 <h2 id="udalenie">Удаление данных</h2>
-<p>Напишите на <a href="mailto:diyarsagyndyk04@gmail.com">diyarsagyndyk04@gmail.com</a> с темой «Job Studio data deletion» и укажите ваш username в Threads/Telegram. Запрос выполняется в течение 30 дней с подтверждением по почте. Доступ приложения можно отозвать и самому в настройках Threads/Instagram («Разрешения для сайтов» / «Приложения и сайты»). Если ваш пост или контакты попали в вакансию — пришлите ссылку, мы удалим запись. Facebook Login приложение не использует. Жители Казахстана также защищены Законом РК «О персональных данных и их защите».</p>
+<p>Напишите на <a href="mailto:diyarsagyndyk04@gmail.com">diyarsagyndyk04@gmail.com</a> с темой «Job Studio data deletion», указав ваш username в Threads или Telegram. Мы стремимся выполнить подтверждённый запрос в течение 30 дней и сообщить по почте. Доступ приложения можно отозвать и самому в настройках Threads/Instagram («Разрешения для сайтов» / «Приложения и сайты»). Если ваш пост или контакты попали в запись о вакансии, пришлите ссылку — мы её удалим. Facebook Login приложение не использует. Жители Казахстана также защищены Законом РК «О персональных данных и их защите».</p>
 
 <h2>Передача данных</h2>
-<p>Мы не продаём и не передаём данные третьим лицам для их целей. Данные обрабатывают только необходимые сервисы: Telegram, Meta (публикация) и Cloudflare (туннель); к сайтам вакансий отправляются обычные веб-запросы. Приложение не предназначено для детей младше 16 лет. Обновлено: 25 ноября 2026 г.</p>
+<p>Мы не продаём и не лицензируем персональные данные и данные Threads. Их обрабатывают только необходимые сервисы: Telegram, Meta (Threads API) и Cloudflare (туннель); к сайтам вакансий отправляются обычные веб-запросы, а при подключении внешнего сервиса обработки текста ему может передаваться текст публичных вакансий. Данные раскрываются, если этого требует закон. Приложение не предназначено для детей младше 16 лет. Обновлено: 25 ноября 2026 г.</p>
 </main>
 
 </body>
